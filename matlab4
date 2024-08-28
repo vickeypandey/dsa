@@ -1,0 +1,16 @@
+% Number of elements in the Fibonacci series
+N = 20;
+
+% Initialize the Fibonacci vector with the first two elements
+F = zeros(1, N); % Preallocate for efficiency
+F(1) = 0;
+F(2) = 1;
+
+% Compute the Fibonacci series up to N elements
+for i = 3:N
+    F(i) = F(i-1) + F(i-2);
+end
+
+% Display the Fibonacci series
+disp('Fibonacci series up to 20 elements:');
+disp(F);
