@@ -1,0 +1,16 @@
+% Number of elements to consider
+N = 100;
+
+% Initialize vector C
+C = zeros(1, N);
+
+% Compute each element of the vector C
+for n = 1:N
+    C(n) = ((-1)^(n+1)) / (2*n - 1);
+end
+
+% Compute the sum of the first 100 elements
+sum_C = sum(C);
+
+% Display the result
+fprintf('The sum of the first 100 elements of vector C is %.4f\n', sum_C);
