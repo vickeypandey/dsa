@@ -1,0 +1,24 @@
+import random
+
+# 1. Create a list of 110 random integers between 1 and 100
+numbers = [random.randint(1, 100) for _ in range(110)]
+
+# Assuming a matrix with 10 rows and 11 columns (110 elements total)
+rows = 10
+cols = 11
+matrix = [numbers[i * cols:(i + 1) * cols] for i in range(rows)]
+
+# 2. Print the matrix
+print("Matrix (10x11):")
+for row in matrix:
+    print(row)
+
+# 3. Find the largest value in the third row (index 2)
+third_row = matrix[2]
+largest_value_third_row = max(third_row)
+print(f"\nLargest value in the third row: {largest_value_third_row}")
+
+# 4. Find the smallest value in the sixth column (index 5)
+sixth_column = [matrix[i][5] for i in range(rows)]
+smallest_value_sixth_column = min(sixth_column)
+print(f"\nSmallest value in the sixth column: {smallest_value_sixth_column}")
