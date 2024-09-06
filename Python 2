@@ -1,0 +1,38 @@
+# Ask the user to enter a string
+user_string = input("Enter a string: ")
+
+# a. The total number of characters in the string
+total_characters = len(user_string)
+print(f"\nTotal number of characters: {total_characters}")
+
+# b. The string repeated 3 times
+repeated_string = user_string * 3
+print(f"\nString repeated 3 times: {repeated_string}")
+
+# c. The first character of the string (index 0)
+first_character = user_string[0] if total_characters > 0 else "String is empty"
+print(f"\nFirst character of the string: {first_character}")
+
+# d. The first three characters of the string
+first_three_characters = user_string[:3] if total_characters >= 3 else user_string
+print(f"\nFirst three characters of the string: {first_three_characters}")
+
+# e. The last three characters of the string
+last_three_characters = user_string[-3:] if total_characters >= 3 else user_string
+print(f"\nLast three characters of the string: {last_three_characters}")
+
+# f. The string in reverse
+reversed_string = user_string[::-1]
+print(f"\nString in reverse: {reversed_string}")
+
+# g. The 7th character of the string (index 6)
+seventh_character = user_string[6] if total_characters > 6 else "String is too short"
+print(f"\n7th character of the string: {seventh_character}")
+
+# h. The string in all caps
+all_caps_string = user_string.upper()
+print(f"\nString in all caps: {all_caps_string}")
+
+# i. The string with every 'a' replaced with an 'e'
+replaced_string = user_string.replace('a', 'e').replace('A', 'E')
+print(f"\nString with 'a' replaced by 'e': {replaced_string}")
