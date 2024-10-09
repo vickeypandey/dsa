@@ -1,0 +1,14 @@
+clc; clear all;
+
+syms x
+
+
+s = log(x) * (x^2 + 3*x + 4);
+
+
+S = int(s, x, 0, 10);
+
+disp('The value of the integral from 0 to 10 is:');
+disp(S);
+
+fplot(s, [0 10]);
