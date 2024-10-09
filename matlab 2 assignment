@@ -1,0 +1,14 @@
+clc; clear all;
+
+syms x
+
+
+s = exp(x) * (cos(x) + sin(x)^2);
+
+
+S = int(s, x, -1, 2);
+
+disp('The value of the integral from -1 to 2 is:');
+disp(S);
+
+fplot(s, [-1 2]);
