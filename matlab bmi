@@ -1,0 +1,27 @@
+
+
+weight = input('Enter your weight in kg: ');
+
+height = input('Enter your height in cm: ');
+
+
+height_m = height / 100;
+
+
+bmi = weight / (height_m^2);
+
+disp("your bmi is :");
+disp(bmi);
+
+if bmi < 18.5
+    result = 'Underweight';
+elseif bmi >= 18.5 && bmi < 25
+    result = 'Normal weight';
+elseif bmi >= 25 && bmi < 30
+    result = 'Overweight';
+else
+    result = 'Obesity';
+end
+
+disp("according to bmi classification is :");
+disp(result);
