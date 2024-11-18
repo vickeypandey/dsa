@@ -1,0 +1,25 @@
+aim: to prepare an activity diagram
+software : umlet
+instructions:
+acitivity diagram describes how activites are coordinate to provide a service which can be at different levels of ABSTRACTION . a typical acitivity diagram appears as follows.
+
+
+
+.
+
+step1
+
+pyramid
+
+true
+
+step 2
+
+pyramid
+
+step 3 
+division into
+step 4.1`````````````````` 4.2
+
+
+post coniditon
