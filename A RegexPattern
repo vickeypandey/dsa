@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <regex.h>
+#include <string.h>
+
+// Function to match a string against a regex pattern
+void check_pattern(char *text, char *pattern, char *label) {
+    regex_t regex;
+    int value;
+
+    // Compile the regular expression
+    value = regcomp(&regex, pattern, REG_EXTENDED);
+    if (value != 0) {
+        printf("Could not compile regex\n");
+        return;
+    }
+
+    // Execute the regex
+    value = regexec(&regex, text, 0, NULL, 0);
+    
+    printf("[%s] Testing: \"%s\"\n", label, text);
+    if (value == 0) {
+        printf("Result: VALID\n");
+    } else {
+        printf("Result: INVALID\n");
+    }
+
+    regfree(&regex);
+    printf("------------------------------------\n");
+}
+
+int main() {
+    // 1. Email Extraction (Set A)
+    // Pattern: Matches standard email format
+    char *email_pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    check_pattern("student@amity.edu", email_pattern, "Set A: Email");
+
+    // 2. Mobile Number Validation (Set B)
+    // Pattern: Starts with 6-9 and exactly 10 digits total
+    char *mobile_pattern = "^[6-9][0-9]{9}$";
+    check_pattern("9876543210", mobile_pattern, "Set B: Mobile");
+
+    // 3. Password Validation (Set C)
+    // Pattern: Min 8 chars, 1 Upper, 1 Lower, 1 Digit
+    // Note: Standard C regex doesn't support lookaheads easily, 
+    // so we use a simplified version or multiple checks.
+    char *pass_pattern = "^[a-zA-Z0-9]{8,}$"; 
+    check_pattern("Admin123", pass_pattern, "Set C: Password (Basic Length)");
+
+    // 4. URL Validation (Set D)
+    // Pattern: Starts with http:// or https://
+    char *url_pattern = "^https?://[a-zA-Z0-9.-]+\\.[a-z]{2,}.*";
+    check_pattern("https://google.com", url_pattern, "Set D: URL");
+
+    return 0;
+}
