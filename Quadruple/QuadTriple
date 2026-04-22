@@ -1,0 +1,61 @@
+Quadruple/Triple: Represents TAC using quadruples and triples.
+
+#include <stdio.h>
+#include <string.h>
+
+// Structure to define a Quadruple: (Op, Arg1, Arg2, Result)
+struct Quadruple {
+    char op[5];
+    char arg1[10];
+    char arg2[10];
+    char res[10];
+} q[10];
+
+// Structure to define a Triple: (Op, Arg1, Arg2)
+struct Triple {
+    char op[5];
+    char arg1[10];
+    char arg2[10];
+} t[10];
+
+int main() {
+    int n, i;
+    printf("\n--- Quadruple and Triple Generator ---\n");
+    printf("Enter the number of operations: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        	printf("\n Enter details for operation %d:\n", i);
+        	printf("Operator: "); 
+scanf("%s", q[i].op);
+        	printf("Argument 1: "); 
+scanf("%s", q[i].arg1);
+        	printf("Argument 2: "); 
+scanf("%s", q[i].arg2);
+printf("Result: "); 
+scanf("%s", q[i].res);
+
+        // Copying data from Quadruple input to Triple structure
+        strcpy(t[i].op, q[i].op);
+        strcpy(t[i].arg1, q[i].arg1);
+        strcpy(t[i].arg2, q[i].arg2);
+    }
+
+    // Output for Quadruples
+    printf("\n--- QUADRUPLE REPRESENTATION ---\n");
+    printf("ID | Op    | Arg1  | Arg2  | Result\n");
+    printf("------------------------------------\n");
+    for (i = 0; i < n; i++) {
+        printf("%d  | %-5s | %-5s | %-5s | %-5s\n", i, q[i].op, q[i].arg1, q[i].arg2, q[i].res);
+    }
+
+    // Output for Triples
+    printf("\n--- TRIPLE REPRESENTATION ---\n");
+    printf("ID | Op    | Arg1  | Arg2\n");
+    printf("---------------------------\n");
+    for (i = 0; i < n; i++) {
+        printf("(%d) | %-5s | %-5s | %-5s\n", i, t[i].op, t[i].arg1, t[i].arg2);
+    }
+
+    return 0;
+}
