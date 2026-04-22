@@ -1,0 +1,102 @@
+C program to Design LALR Bottom up Parser
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main() {
+    // Parsing table: m[Non-Terminal][Terminal]
+    // Non-terminals: e=0(E), b=1(E'), t=2(T), c=3(T'), f=4(F)
+    // Terminals: i=0, +=1, *=2, (=3, )=4, $=5
+    char m[5][6][5] = {
+        {"tb", "", "", "tb", "", ""},
+        {"", "+tb", "", "", "n", "n"},
+        {"fc", "", "", "fc", "", ""},
+        {"", "n", "*fc", "", "n", "n"},
+        {"i", "", "", "(e)", "", ""}
+    };
+
+    int size[5][6] = {
+        {2,0,0,2,0,0}, {0,3,0,0,1,1}, {2,0,0,2,0,0}, {0,1,3,0,1,1}, {1,0,0,3,0,0}
+    };
+
+    char s[50], stack[50];
+    int i, j, k, n, str1, str2;
+
+    printf("\n--- LL(1) Predictive Parser ---\n");
+    printf("Enter the input string (e.g., i+i*i): ");
+    scanf("%s", s);
+    strcat(s, "$");
+    n = strlen(s);
+
+    stack[0] = '$';
+    stack[1] = 'e'; // Start symbol E
+    i = 1; // Stack pointer
+    j = 0; // Input pointer
+
+    printf("\n%-15s %-15s\n", "Stack", "Input");
+    printf("-------------------------------\n");
+
+    while (stack[i] != '$' || s[j] != '$') {
+        // Print current state
+        for (k = 0; k <= i; k++) printf("%c", stack[k]);
+        printf("\t\t");
+        for (k = j; k < n; k++) printf("%c", s[k]);
+        printf("\n");
+
+        // Case 1: Match terminal
+        if (stack[i] == s[j]) {
+            i--;
+            j++;
+            continue;
+        }
+
+        // Case 2: Map Stack Non-Terminal to Index
+        switch (stack[i]) {
+            case 'e': str1 = 0; break;
+            case 'b': str1 = 1; break;
+            case 't': str1 = 2; break;
+            case 'c': str1 = 3; break;
+            case 'f': str1 = 4; break;
+            default: printf("\n ERROR: Invalid Non-Terminal\n"); exit(1);
+        }
+
+        // Case 3: Map Input Terminal to Index
+        switch (s[j]) {
+            case 'i': str2 = 0; break;
+            case '+': str2 = 1; break;
+            case '*': str2 = 2; break;
+            case '(': str2 = 3; break;
+            case ')': str2 = 4; break;
+            case '$': str2 = 5; break;
+            default: printf("\nERROR: Invalid Terminal\n"); exit(1);
+        }
+
+        // Case 4: Table Lookup
+        if (m[str1][str2][0] == '\0') {
+            printf("\nERROR: No entry in parsing table. String Rejected.\n");
+            exit(0);
+        } else if (m[str1][str2][0] == 'n') {
+            // Epsilon reduction
+            i--;
+        } else {
+            // Replace Non-Terminal with RHS in reverse
+            int len = size[str1][str2];
+            char rhs[10];
+            strcpy(rhs, m[str1][str2]);
+            
+            // Pop the current non-terminal
+            i--; 
+            
+            // Push RHS in reverse order
+            for (k = len - 1; k >= 0; k--) {
+                i++;
+                stack[i] = rhs[k];
+            }
+        }
+    }
+
+    printf("\n SUCCESS: String is accepted by the grammar.\n");
+    return 0;
+}
+}
