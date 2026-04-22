@@ -94,7 +94,7 @@ int main() {
 //SymbolTableEnds
 
 //LL1 start
-
+//LL1 bottom up
 
 #include <stdio.h>
 #include <string.h>
